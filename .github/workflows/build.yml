@@ -51,7 +51,8 @@ jobs:
 
       # 5️⃣ Uploader le binaire comme artifact
       - name: Upload binary
-        uses: actions/upload-artifact@v3
-        with:
-          name: Grademe-${{ matrix.os }}
-          path: Grademe
+    uses: actions/upload-artifact@v4
+    with:
+    name: Grademe-${{ matrix.os }}
+    path: Grademe
+
