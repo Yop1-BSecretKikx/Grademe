@@ -286,16 +286,7 @@ int main ()
 
     conn = mysql_init(NULL);
 
-    char host[64], user[64], pass[64], db[64];
-    unsigned int port;
-
-    FILE *f = fopen("config.ini", "r");
-
-    fscanf(f, "host=%63s\nuser=%63s\npassword=%63s\ndatabase=%63s\nport=%u", 
-           host, user, pass, db, &port);
-    fclose(f);
-
-    if(mysql_real_connect(conn, host,user,pass,db,port,NULL,CLIENT_SSL) != 0)
+    if(mysql_real_connect(conn, "34.94.148.186","root","44441969@Aa","Licorneme",3306,NULL,CLIENT_SSL) != 0)
     {
         printf("🦄Connected Mysql V8.0🦄\n\n");
         welcomer();
