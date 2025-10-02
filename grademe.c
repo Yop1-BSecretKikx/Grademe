@@ -35,24 +35,42 @@ void debug_grademe_case(char *expected,char *output)
 void init_render_traces()
 {
     char p[1024]; unsigned size = sizeof(p);
+
+    int os = 0;
+
 #ifdef __APPLE__
     _NSGetExecutablePath(p, &size);
+    os = 2;
 #else
     int n = readlink("/proc/self/exe", p, sizeof(p)-1);
     p[n] = 0;
+    os = 1;
 #endif
-    char cmd[2048];
-    sprintf(cmd,
+    if(os == 2)
+    {
+        char cmd[2048];
+        sprintf(cmd,
         "rm -rf \"%s/render\" \"%s/traces\" && mkdir \"%s/render\" \"%s/traces\"",
         dirname(p), dirname(p), dirname(p), dirname(p));
-    system(cmd);
+        system(cmd);
 
         //Not good way its fine for the moment
         char buff_path[300];
         sprintf(buff_path,"cd %s/traces && touch trace.txt",dirname(p));
+        system(buff_path);
+    }
+    if(os == 1)
+    {
+        char cmd[2048];
+        char *home = getenv("HOME");  // ton $HOME
+        sprintf(cmd,"rm -rf \"%s/render\" \"%s/traces\" && mkdir -p \"%s/render\" \"%s/traces\"",home, home, home, home);
+        system(cmd);
 
-        printf("\nexpected path : %s \n",buff_path);
-    system(buff_path);
+        //Not good way its fine for the moment
+        char buff_path[300];
+        sprintf(buff_path,"cd %s/traces && touch trace.txt",dirname(p));
+        system(buff_path);
+    }
 }
 
 void commande()
