@@ -43,7 +43,7 @@ void init_render_traces()
 #endif
     char cmd[2048];
     sprintf(cmd,
-        "sudo su && rm -rf \"%s/render\" \"%s/traces\" && mkdir \"%s/render\" \"%s/traces\"",
+        "rm -rf \"%s/render\" \"%s/traces\" && mkdir \"%s/render\" \"%s/traces\"",
         dirname(p), dirname(p), dirname(p), dirname(p));
     system(cmd);
 
