@@ -50,6 +50,8 @@ void init_render_traces()
         //Not good way its fine for the moment
         char buff_path[300];
         sprintf(buff_path,"cd %s/traces && touch trace.txt",dirname(p));
+
+        printf("\nexpected path : %s \n",buff_path);
     system(buff_path);
 }
 
