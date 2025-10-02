@@ -46,6 +46,9 @@ void init_render_traces()
     p[n] = 0;
     os = 1;
 #endif
+
+
+    printf("os :%d",os);
     if(os == 2)
     {
         char cmd[2048];
@@ -71,6 +74,7 @@ void init_render_traces()
         sprintf(buff_path,"cd %s/traces && touch trace.txt",dirname(p));
         system(buff_path);
     }
+    
 }
 
 void commande()
