@@ -261,6 +261,7 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
 
     //printf("\n%s\n",expected_case);
     //Add int main()
+    printf("\npassed1\n");
     if(is_file_existe == 0)
     {
         char buff_traces_path[400];
@@ -272,7 +273,7 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
         fclose(report_traces);
         return (0);
     }
-
+    printf("\npassed2\n");
     char exer_path[1000];
 
     if(os == 2)
@@ -283,6 +284,7 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
     {
         sprintf(exer_path,"%s/Desktop/Grademe/render/%s.c",home,file_name);
     }
+    printf("\npassed3\n");
     FILE *add_mainT = fopen(exer_path,"a+");
     char tester[1300];
     sprintf(tester,"\n%s",main_tester);
@@ -291,7 +293,7 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
     fclose(add_test_lib);
     fputs(tester,add_mainT);
     fclose(add_mainT);
-
+    printf("\npassed4\n");
     /*
     compile compare
     */
@@ -307,11 +309,12 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
         //linux
         sprintf(path_ex_and_compile, "gcc -O2 -o %s/Desktop/Grademe/test_ex %s/Desktop/Grademe/render/%s.c 2>%s/Desktop/Grademe/traces/trace.txt",home,home,file_name,home);
     }
+    printf("\npassed5\n");
     system(path_ex_and_compile);
-
+    printf("\npassed6\n");
     char line[4000];
-    char path_exec[1000];
-    char result[1000] = "";
+    char path_exec[2000];
+    char result[2000] = "";
     if(os == 2)
     {
         //mac
@@ -322,23 +325,25 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
         //linux
         sprintf(path_exec,"%s/Desktop/Grademe/test_ex",home);
     }
+    printf("\npassed7\n");
     FILE *open_exec = popen(path_exec,"r");
 
     while(fgets(line,sizeof(line),open_exec))
     {
         strcat(result,line);
     }
-
+    printf("\npassed8\n");
     //debug_grademe_case(result,expected_case);
 
     pclose(open_exec);
     //sleep(1);
     rm_content(main_tester,file_name,"#include <stdio.h>");
-
+    printf("\npassed9\n");
     if(strcmp(result,expected_case) == 0)
     {
         return (1);
     }
+    printf("\npassed10\n");
     //compile File here catche result compare top of rm_content
     
     return (0);
