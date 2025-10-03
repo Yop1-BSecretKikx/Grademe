@@ -65,7 +65,7 @@ void init_render_traces()
     if(os == 1)
     {
         char cmd[2048];
-        char *home = getenv("~/grademe");
+        char *home = "~/grademe";
         printf("\nCurrent path from (exec :)\n%s",home);
         sprintf(cmd,"mkdir \"%s/render\" \"%s/traces\"",home, home);
         system(cmd);
