@@ -306,12 +306,12 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
     if(os == 1)
     {
         //linux
-        sprintf(path_ex_and_compile, "gcc -O2 -o %s/Desktop/Grademe/test_ex %s/Desktop/Grademe/render/%s.c",home,home,file_name);
+        sprintf(path_ex_and_compile, "gcc -O2 -o %s/Desktop/Grademe/test_ex %s/Desktop/Grademe/render/%s.c 2>%s/Desktop/Grademe/traces/trace.txt",home,home,file_name,home);
     }
     system(path_ex_and_compile);
 
     char line[4000];
-    char path_exec[250];
+    char path_exec[1000];
     char result[1000] = "";
     if(os == 2)
     {
