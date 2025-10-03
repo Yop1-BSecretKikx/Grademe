@@ -247,12 +247,16 @@ void rm_content(char *main_tester, char *file_name, char *lib_std)
 int tester_func(char *main_tester, char *expected_case,char *file_name,int is_file_existe)
 {
 
+    int os = 0;
+
         char p[1024]; unsigned size = sizeof(p);
 #ifdef __APPLE__
     _NSGetExecutablePath(p, &size);
+    os = 2;
 #else
     int n = readlink("/proc/self/exe", p, sizeof(p)-1);
     p[n] = 0;
+    os = 1;
 #endif
 
     //printf("\n%s\n",expected_case);
@@ -261,13 +265,16 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
     {
         char buff_traces_path[400];
         sprintf(buff_traces_path,"%s/traces/trace.txt",dirname(p));
+
         FILE *report_traces = fopen(buff_traces_path,"a");
         fputs("\nError file not provided in './render' please create your assignement\n",report_traces);
+
         fclose(report_traces);
         return (0);
     }
     char exer_path[1000];
     sprintf(exer_path,"%s/render/%s.c",dirname(p),file_name);
+
     FILE *add_mainT = fopen(exer_path,"a+");
     char tester[1300];
     sprintf(tester,"\n%s",main_tester);
@@ -281,13 +288,33 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
     compile compare
     */
     char path_ex_and_compile[1000];
-    sprintf(path_ex_and_compile,"gcc -o %s/test_ex %s/render/%s.c 2>%s/traces/trace.txt",dirname(p),dirname(p),file_name,dirname(p));
+
+    const char *home = getenv("HOME");
+    if(os == 2)
+    {
+        //mac
+        sprintf(path_ex_and_compile,"gcc -o %s/test_ex %s/render/%s.c 2>%s/traces/trace.txt",dirname(p),dirname(p),file_name,dirname(p));
+    }
+    if(os == 1)
+    {
+        //linux
+        sprintf(path_ex_and_compile, "gcc -o %s/Desktop/Grademe/test_ex %s/render/%s.c",home,home,file_name);
+    }
     system(path_ex_and_compile);
 
     char line[4000];
     char path_exec[250];
     char result[1000] = "";
-    sprintf(path_exec,"%s/test_ex",dirname(p));
+    if(os == 2)
+    {
+        //mac
+        sprintf(path_exec,"%s/test_ex",dirname(p));
+    }
+    if(os == 1)
+    {
+        //linux
+        sprintf(path_exec,"%s/Desktop/Grademe/test_ex",home);
+    }
     FILE *open_exec = popen(path_exec,"r");
 
     while(fgets(line,sizeof(line),open_exec))
@@ -309,6 +336,8 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
     
     return (0);
 }
+
+
 
 int main ()
 {
