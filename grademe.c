@@ -336,9 +336,9 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
     //debug_grademe_case(result,expected_case);
 
     pclose(open_exec);
-    printf("\npassed9\n");
     //sleep(1);
     rm_content(main_tester,file_name,"#include <stdio.h>");
+    printf("\npassed9\n");
     if(strcmp(result,expected_case) == 0)
     {
         return (1);
