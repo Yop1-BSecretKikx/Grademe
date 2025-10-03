@@ -116,6 +116,10 @@ char **fetche_disigned_data(MYSQL *conn, char *target_id)
         mysql_close(conn);
         return NULL;
     }
+    else
+    {
+        printf("\n \033[0;32m[query]\033[0m\n");
+    }
 
     res = mysql_store_result(conn);
     if (!res) {
