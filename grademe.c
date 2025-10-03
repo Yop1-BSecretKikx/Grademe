@@ -66,11 +66,12 @@ void init_render_traces()
     {
     char cmd[2048];
         printf("\nOS : LINUX\n");
-    sprintf(cmd, "mkdir \"%s/grademe/render\" \"%s/grademe/traces\"", "~/desktop", "~/desktop");
-    system(cmd);
 
     char buff_path[300];
-    sprintf(buff_path, "cd %s/grademe/traces && touch trace.txt", "~/desktop");
+    sprintf(cmd, "mkdir -p \"%s/desktop/grademe/render\" \"%s/desktop/grademe/traces\"", getenv("HOME"), getenv("HOME"));
+    system(cmd);
+
+    sprintf(buff_path, "cd %s/desktop/grademe/traces && touch trace.txt", getenv("HOME"));
     system(buff_path);
     }
     
