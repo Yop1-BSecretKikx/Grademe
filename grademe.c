@@ -65,7 +65,7 @@ void init_render_traces()
     if(os == 1)
     {
         char cmd[2048];
-        char *home = getenv("HOME");
+        char *home = getenv("HOME/BAKR");
 
         if (!home)
         {
