@@ -47,10 +47,9 @@ void init_render_traces()
     os = 1;
 #endif
 
-
-    printf("os :%d",os);
     if(os == 2)
     {
+        printf("\nOS : MAC\n");
         char cmd[2048];
         sprintf(cmd,
         "rm -rf \"%s/render\" \"%s/traces\" && mkdir \"%s/render\" \"%s/traces\"",
@@ -65,13 +64,13 @@ void init_render_traces()
 
     if(os == 1)
     {
-        char cmd[2048];
-
-    sprintf(cmd, "mkdir \"%s/grademe/render\" \"%s/grademe/traces\"", "desktop", "desktop");
+    char cmd[2048];
+        printf("\nOS : LINUX\n");
+    sprintf(cmd, "mkdir \"%s/grademe/render\" \"%s/grademe/traces\"", "~/desktop", "~/desktop");
     system(cmd);
 
     char buff_path[300];
-    sprintf(buff_path, "cd %s/grademe/traces && touch trace.txt", "desktop");
+    sprintf(buff_path, "cd %s/grademe/traces && touch trace.txt", "~/desktop");
     system(buff_path);
     }
     
