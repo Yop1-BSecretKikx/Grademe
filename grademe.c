@@ -246,7 +246,7 @@ void rm_content(char *main_tester, char *file_name, char *lib_std)
 
 int tester_func(char *main_tester, char *expected_case,char *file_name,int is_file_existe)
 {
-
+    const char *home = getenv("HOME");
     int os = 0;
 
         char p[1024]; unsigned size = sizeof(p);
@@ -272,9 +272,18 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
         fclose(report_traces);
         return (0);
     }
+
     char exer_path[1000];
     sprintf(exer_path,"%s/render/%s.c",dirname(p),file_name);
 
+    if(os == 2)
+    {
+        sprintf(exer_path,"%s/render/%s.c",dirname(p),file_name);
+    }
+    if(os == 1)
+    {
+        sprintf(exer_path,"%s/Desktop/Grademe/render/%s.c",home,file_name);
+    }
     FILE *add_mainT = fopen(exer_path,"a+");
     char tester[1300];
     sprintf(tester,"\n%s",main_tester);
@@ -289,7 +298,6 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
     */
     char path_ex_and_compile[1000];
 
-    const char *home = getenv("HOME");
     if(os == 2)
     {
         //mac
@@ -298,7 +306,7 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
     if(os == 1)
     {
         //linux
-        sprintf(path_ex_and_compile, "gcc -o %s/Desktop/Grademe/test_ex %s/render/%s.c",home,home,file_name);
+        sprintf(path_ex_and_compile, "gcc -O2 -o %s/Desktop/Grademe/test_ex %s/Desktop/Grademe/render/%s.c",home,home,file_name);
     }
     system(path_ex_and_compile);
 
