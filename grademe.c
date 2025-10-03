@@ -210,20 +210,40 @@ int existe_file(char *file_test)
 
 void rm_content(char *main_tester, char *file_name, char *lib_std)
 {
+    const char *home = getenv("HOME");
+    int os = 0;
 
-            char p[1024]; unsigned size = sizeof(p);
+char p[1024]; unsigned size = sizeof(p);
 #ifdef __APPLE__
     _NSGetExecutablePath(p, &size);
+    os = 2;
 #else
     int n = readlink("/proc/self/exe", p, sizeof(p)-1);
     p[n] = 0;
+    os = 1;
 #endif
 
     char lib_test[19] = "#include <stdio.h>";
-    char buff[500];
-    sprintf(buff,"%s/render/%s.c",dirname(p),file_name);
-    char buff2[500];
-    sprintf(buff2,"%s/render/temp.txt",dirname(p));
+    char buff[1000];
+    if(os == 2)
+    {
+        sprintf(buff,"%s/render/%s.c",dirname(p),file_name);
+    }
+    if(os == 1)
+    {
+        sprintf(buff,"%s/Desktop/Grademe/render/%s.c",home,file_name);
+    }
+    char buff2[1000];
+
+    if(os == 2)
+    {
+        sprintf(buff2,"%s/render/temp.txt",dirname(p));
+    }
+    if(os == 1)
+    {
+        sprintf(buff2,"%s/Desktop/Grademe/render/temp.txt",home);
+    }
+    
     FILE *read_file = fopen(buff,"r");
     FILE *temp = (fopen(buff2,"w"));
 
