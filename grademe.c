@@ -65,7 +65,8 @@ void init_render_traces()
     if(os == 1)
     {
         char cmd[2048];
-        char *home = getenv("HOME");  // ton $HOME
+        char *home = getenv("HOME");
+        printf("\nCurrent path from (exec :)\n%s",home);
         sprintf(cmd,"rm -rf \"%s/render\" \"%s/traces\" && mkdir -p \"%s/render\" \"%s/traces\"",home, home, home, home);
         system(cmd);
 
