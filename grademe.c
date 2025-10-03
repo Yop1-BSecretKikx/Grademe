@@ -70,7 +70,6 @@ void init_render_traces()
         if (!home)
         {
             fprintf(stderr, "Could not get HOME\n");
-            return 1;
         }
 
     printf("\nCurrent path from (exec :)\n%s\n", home);
