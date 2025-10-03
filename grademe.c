@@ -72,7 +72,7 @@ void init_render_traces()
             fprintf(stderr, "Could not get HOME\n");
         }
 
-    printf("\nCurrent path from (exec :)\n%s\n", home);
+    printf("\nCurrent path from (exec :%s)\n", home);
 
     sprintf(cmd, "mkdir -p \"%s/grademe/render\" \"%s/grademe/traces\"", home, home);
     system(cmd);
