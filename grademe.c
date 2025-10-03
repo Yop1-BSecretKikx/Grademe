@@ -274,7 +274,6 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
     }
 
     char exer_path[1000];
-    sprintf(exer_path,"%s/render/%s.c",dirname(p),file_name);
 
     if(os == 2)
     {
@@ -296,7 +295,7 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
     /*
     compile compare
     */
-    char path_ex_and_compile[1000];
+    char path_ex_and_compile[2000];
 
     if(os == 2)
     {
