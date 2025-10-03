@@ -65,20 +65,12 @@ void init_render_traces()
     if(os == 1)
     {
         char cmd[2048];
-        char *home = getenv("HOME/BAKR");
 
-        if (!home)
-        {
-            fprintf(stderr, "Could not get HOME\n");
-        }
-
-    printf("\nCurrent path from (exec :%s)\n", home);
-
-    sprintf(cmd, "mkdir -p \"%s/grademe/render\" \"%s/grademe/traces\"", home, home);
+    sprintf(cmd, "mkdir \"%s/grademe/render\" \"%s/grademe/traces\"", "~/desktop", "~/desktop");
     system(cmd);
 
     char buff_path[300];
-    sprintf(buff_path, "cd %s/grademe/traces && touch trace.txt", home);
+    sprintf(buff_path, "cd %s/grademe/traces && touch trace.txt", "~/desktop");
     system(buff_path);
     }
     
