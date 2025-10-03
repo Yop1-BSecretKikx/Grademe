@@ -366,7 +366,32 @@ int tester_func(char *main_tester, char *expected_case,char *file_name,int is_fi
     return (0);
 }
 
-
+int avaliable(MYSQL *conn)
+{
+    //1 succes
+    //0 error
+    MYSQL_RES *res;
+    MYSQL_ROW row;
+    printf("\n🦄Beta Active ?\n");
+    sleep(1);
+    if(mysql_query(conn,"SELECT * FROM avaliable WHERE active = '1'"))
+    {
+        printf("%s",mysql_error(conn));
+        return (0);
+    }
+    res = mysql_store_result(conn);
+    if(!res)
+    {
+        printf("error");
+        return (0);
+    }
+    if((row = mysql_fetch_row(res)))
+    {
+        printf("🦄Beta Avaliable\n");
+        return (1);
+    }
+    return (0);
+}
 
 int main ()
 {
@@ -386,6 +411,11 @@ int main ()
     if(mysql_real_connect(conn, host,user,pass,db,port,NULL,CLIENT_SSL) != 0)
     {
         printf("🦄Connected Mysql V8.0🦄\n\n");
+        if(avaliable(conn) == 0)
+        {
+            printf("\n🦄Beta is not avaliable !🦄\n");
+            return (0);
+        }
         welcomer();
     }
     else
@@ -393,6 +423,8 @@ int main ()
         printf("ERROR");
         return (0);
     }
+    //checking if beta avaliable
+
     t_grade user_grade;
     user_grade.grade = 0;
 
